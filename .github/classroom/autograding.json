@@ -35,7 +35,7 @@
       {
         "name": "get_indicies",
         "setup": "",
-        "run": "tests/build/testAll get_indices",
+        "run": "tests/build/testAll get_indicies",
         "input": "",
         "output": "",
         "comparison": "included",
