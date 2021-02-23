@@ -30,7 +30,15 @@ jobs:
         run: |
           cd tests
           cmake -S . -B build
-          cmake --build build --config Release
+          cmake --build build --config Release 2>&1 |tee ../build-log.txt
+          exit "${PIPESTATUS[0]}"
+         
+      - name: check build
+        if: ${{ failure() }}
+        run: |
+          echo ${{steps.build.outputs.exit_code}}
+          echo "BUILD FAILED check build-log.txt"
+
       - name: autograding
         uses: education/autograding@v1
 
@@ -40,6 +48,12 @@ jobs:
         with:
             name: breakdown
             path: |
-                     breakdown.txt
+                     build-log.txt
                      log.txt
                 
+           
+        #- name: context
+        #if: ${{always()}}
+        #env:
+        #   STEPS_CONTEXT: ${{ toJSON(steps) }}
+        # run: echo "$STEPS_CONTEXT"
