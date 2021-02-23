@@ -18,3 +18,4 @@ do
 	total=$((total+t))
 done
 echo Total $score/$total
+gh pr comment 1 -b "Total: $score / $total"
