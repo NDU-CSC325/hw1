@@ -32,3 +32,13 @@ jobs:
           cmake -S . -B build
           cmake --build build --config Release
           build/runAll
+      
+      - name: upload
+        if: ${{always()}}
+        uses: actions/upload-artifact@v2
+        with:
+            name: breakdown
+            path: |
+                     breakdown.txt
+                     build/log.txt
+                
