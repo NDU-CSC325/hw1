@@ -1,0 +1,66 @@
+{
+
+    "tests": [
+      {
+        "name": "brute_max_sum",
+        "setup": "",
+        "run": "tests/build/testAll brute_max_sum",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 2,
+        "points": 18
+      },
+
+      {
+        "name": "max_sub_sum",
+        "setup": "",
+        "run": "tests/build/testAll max_sub_sum",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 2,
+        "points": 18
+      },
+      {
+        "name": "max_profit",
+        "setup": "",
+        "run": "tests/build/testAll max_profit",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 2,
+        "points": 18
+      },
+      {
+        "name": "get_indicies",
+        "setup": "",
+        "run": "tests/build/testAll get_indices",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 2,
+        "points": 18
+      },
+      {
+        "name": "max_profit_interval",
+        "setup": "",
+        "run": "tests/build/testAll max_profit_interval",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 2,
+        "points": 18
+      },
+      {
+        "name": "peak",
+        "setup": "",
+        "run": "tests/build/testAll peak",
+        "input": "",
+        "output": "",
+        "comparison": "included",
+        "timeout": 2,
+        "points": 18
+      }
+    ]
+  }
