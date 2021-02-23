@@ -5,8 +5,8 @@ name: Run Tests
 # Controls when the action will run. 
 on:
   # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
+  #workflow_dispatch:
+  [push]
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -31,8 +31,9 @@ jobs:
           cd tests
           cmake -S . -B build
           cmake --build build --config Release
-          build/testAll
-      
+      - name: autograding
+        uses: education/autograding@v1
+
       - name: upload
         if: ${{always()}}
         uses: actions/upload-artifact@v2
