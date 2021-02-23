@@ -5,22 +5,7 @@
 #include <algorithm>
 #include <iterator>
 #include <tuple>
-
-template<typename Iter >
- std::pair<int, int> get_indices(Iter begin, Iter start, Iter end) {
-  
-    return std::make_pair(1,2);
-}
-template <typename Iter>
-std::pair<Iter,Iter> max_profit_interval(Iter start, Iter end) {
-    
-    return std::make_pair(start,start);
-}
-template <typename Iter>
-typename Iter::value_type  max_profit(Iter start, Iter end) {
-   
-    return  *start;
-}
+#include "stock.h"
 
 int main()
 {
