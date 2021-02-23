@@ -17,5 +17,4 @@ do
 	score=$(($score+$disp))
 	total=$((total+t))
 done
-echo $score
-echo $total
+echo Total $score/$total
