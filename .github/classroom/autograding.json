@@ -43,7 +43,7 @@
         "points": 18
       },
       {
-        "name": "max_profit_interval",
+        "name": "max_interval",
         "setup": "",
         "run": "tests/build/testAll max_profit_interval",
         "input": "",

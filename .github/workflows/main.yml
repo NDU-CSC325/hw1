@@ -42,7 +42,7 @@ jobs:
         run: |
           echo ${{steps.build.outputs.exit_code}}
           echo "BUILD FAILED check build-log.txt"
-          gh pr comment ${{github.event.issue_number}} -b "Please wait a few minutes. The grade will be displayed below"
+          gh pr comment ${{github.event.issue_number}} -b "Failed to compile. Check build-log.txt"
       - name: greeting
         run: gh pr comment ${{github.event.issue_number}} -b "Please wait a few minutes. The grade will be displayed below"
         env:
@@ -50,7 +50,8 @@ jobs:
 
       - name: autograding
         uses: education/autograding@v1
-
+      - name: report
+        run: sh report.sh
       - name: upload
         if: ${{always()}}
         uses: actions/upload-artifact@v2
