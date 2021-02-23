@@ -40,5 +40,5 @@ jobs:
             name: breakdown
             path: |
                      breakdown.txt
-                     build/log.txt
+                     tests/log.txt
                 
