@@ -51,6 +51,7 @@ jobs:
       - name: autograding
         uses: education/autograding@v1
       - name: report
+        if: ${{ always() }}
         run: sh report.sh
       - name: upload
         if: ${{always()}}
