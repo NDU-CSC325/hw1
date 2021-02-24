@@ -45,7 +45,7 @@
       {
         "name": "max_interval",
         "setup": "",
-        "run": "tests/build/testAll max_profit_interval",
+        "run": "tests/build/testAll max_interval",
         "input": "",
         "output": "",
         "comparison": "included",
