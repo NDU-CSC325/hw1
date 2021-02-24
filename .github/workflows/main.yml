@@ -53,6 +53,8 @@ jobs:
       - name: report
         if: ${{ always() }}
         run: sh report.sh
+        env:
+                GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: upload
         if: ${{always()}}
         uses: actions/upload-artifact@v2
