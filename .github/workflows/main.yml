@@ -6,13 +6,13 @@ name: Run Tests
 on:
   # Allows you to run this workflow manually from the Actions tab
   #workflow_dispatch:
-  [push]
-  #[issue_comment]
+  #[push]
+  [issue_comment]
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
-          # if: ${{(github.event.issue.pull_request) && contains(github.event.comment.body,'/eval')}}
+    if: ${{(github.event.issue.pull_request) && contains(github.event.comment.body,'/eval')}}
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
