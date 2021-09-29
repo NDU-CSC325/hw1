@@ -1,72 +1,19 @@
-# This is a basic workflow to help you get started with Actions
-
-name: Run Tests
-
-# Controls when the action will run. 
+name: sendEvent
 on:
-  # Allows you to run this workflow manually from the Actions tab
-  #workflow_dispatch:
-  #[push]
-  [issue_comment]
+  issue_comment:
+
+          ##workflow_dispatch:
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    if: ${{(github.event.issue.pull_request) && contains(github.event.comment.body,'/eval')}}
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      # Runs a set of commands using the runners shell
-      - name: unpack
-        env:
-          token : ${{secrets.encrypt_token}}
-        run: |
-          cat tests.tar |openssl aes-256-cbc -a -d -pass pass:$token | tar xv
-          ls
-      - name: build
-        run: |
-          cd tests
-          cmake -S . -B build
-          cmake --build build --config Release 2>&1 |tee ../build-log.txt
-          exit "${PIPESTATUS[0]}"
-         
-      - name: check build
-        env:
-            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        if: ${{ failure() }}
-        run: |
-          echo ${{steps.build.outputs.exit_code}}
-          echo "BUILD FAILED check build-log.txt"
-          gh pr comment ${{github.event.issue_number}} -b "Failed to compile. Check build-log.txt"
-      - name: greeting
-        run: gh pr comment ${{github.event.issue_number}} -b "Please wait a few minutes. The grade will be displayed below"
-        env:
-                 GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-      - name: autograding
-        uses: education/autograding@v1
-      - name: report
-        if: ${{ always() }}
-        run: sh report.sh
-        env:
-                GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - name: upload
-        if: ${{always()}}
-        uses: actions/upload-artifact@v2
-        with:
-            name: breakdown
-            path: |
-                     build-log.txt
-                     log.txt
-                
-           
-        #- name: context
-        #if: ${{always()}}
-        #env:
-        #   STEPS_CONTEXT: ${{ toJSON(steps) }}
-        # run: echo "$STEPS_CONTEXT"
+  send:
+          #  if: ${{(github.run_number<11 && github.event.issue.pull_request && contains(github.event.comment.body,'/eval'))}}
+     runs-on: ubuntu-latest
+     steps:
+         - name: send dispatch
+           uses: peter-evans/repository-dispatch@v1
+           with:
+              token: ${{ secrets.workflow_token }}
+              repository: NDU-CSC325/autograding
+              event-type: autograde
+              client-payload: '{"run_number":${{github.run_number}},"ref":"${{github.head_ref}}","run_id":"${{github.run_id}}","repo":"${{github.repository}}"}'
